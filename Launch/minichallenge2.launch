@@ -1,0 +1,56 @@
+<launch>
+
+    <!--######################## PARAMETROS #################################-->
+
+    <!-- Cargar parámetros del robot desde el archivo YAML -->
+    <!--rosparam file="$(find puzzlebot_sim)/config/robot_params.yaml" command="load"/!-->
+
+
+
+    <!--################## NODOS #######################################-->
+
+    <!-- Ejecutar el nodos de Python -->
+
+
+    <!-- publicar a cmd vel-->
+    <!--node name="cmd_vel_publisher" pkg="puzzlebot_sim" type="cmd_vel_publisher.py" output="screen"/!-->
+
+    <!-- simulación del robot-->
+    <node name="puzzlebot_kinematic_model" pkg="puzzlebot_sim" type="puzzlebot_kinematic_model.py" output="screen"/>
+    
+
+    <!-- Run the localisation node -->
+    <node name="localisation" pkg="puzzlebot_sim" type="localisation.py" output="screen"/>
+
+    <!-- Run the square node -->
+
+    <node name="Trajectory_Set_Point_Generator" pkg="puzzlebot_sim" type="Trajectory_Set_Point_Generator.py" output="screen"/>
+
+
+
+    <!--#################### CARGAR VALORES DEL ROBOT Y RVIZ #########################-->
+
+
+        <!-- Load the URDF into the parameter server -->
+    <param name="robot_description" textfile="$(find puzzlebot_sim)/urdf/puzzlebot_jetson_ed_urdf.urdf" />
+
+
+    <!-- Run the robot_state_publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+
+    <!-- Launch the joint state publisher -->
+    <node pkg="puzzlebot_sim" type="Joint_State_Publisher.py" name="Joint_State_Publisher" /> 
+
+
+    <node  pkg="puzzlebot_sim" type="Coordinate_Transform.py" name="Coordinate_Transform"> 
+
+    </node> 
+
+
+    <!-- Launch RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find puzzlebot_sim)/config/puzzlebot_rviz_config.rviz" required="true"/>
+
+
+
+</launch>

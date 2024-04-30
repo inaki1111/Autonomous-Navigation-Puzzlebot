@@ -1,0 +1,5 @@
+robot_params:
+  wheel_radius: 0.05  # Radio de las ruedas en metros
+  wheel_separation: 0.19  # Distancia entre ruedas en metros
+  linear_speed: 0.5  # Velocidad lineal en m/s
+  angular_speed: 0.1  # Velocidad angular en rad/s
