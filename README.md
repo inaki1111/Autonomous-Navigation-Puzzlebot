@@ -42,8 +42,9 @@ Las contribuciones son bienvenidas. Si deseas contribuir a este proyecto, sigue 
 
 ## Autores
 
-- Nombre del autor 1
-- Nombre del autor 2
+- Enrique Martinez Luna A01552626
+- Iñaki Roman Martinez A01702712
+- Salvador Yair Gallegos Lopez 01707962 A01707962
 
 ## Licencia
 
