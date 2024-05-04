@@ -8,7 +8,7 @@ El objetivo de este proyecto es permitir que un robot móvil navegue de manera a
 
 ## Requisitos del Sistema
 
-- ROS (Sistema Operativo de Robots) instalado. Se recomienda la distribución ROS Melodic o superior.
+- ROS (Sistema Operativo de Robots) instalado. Se recomienda la distribución ROS Noetic.
 - Un robot móvil compatible con ROS.
 - Sensores de percepción del entorno, como cámaras o sensores láser.
 - Paquetes de navegación de ROS, como `move_base`, `map_server` y `amcl`.
@@ -28,7 +28,7 @@ El objetivo de este proyecto es permitir que un robot móvil navegue de manera a
 1. Inicia el sistema de ROS:
 
 
-2. ejecuta el comando desde la terminal (`roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`)
+2. ejecuta el comando desde la terminal `roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`
 
 ## Contribuciones
 
