@@ -28,7 +28,7 @@ El objetivo de este proyecto es permitir que un robot móvil navegue de manera a
 1. Inicia el sistema de ROS:
 
 
-3. Interactúa con el sistema de navegación enviando metas de destino al nodo `move_base` o utilizando herramientas de visualización como RViz para monitorear el progreso del robot.
+2. ejecuta el comando desde la terminal (`roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`)
 
 ## Contribuciones
 
