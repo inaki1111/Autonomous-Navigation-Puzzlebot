@@ -8,31 +8,22 @@
     Reference: http://wiki.ros.org/roslaunch/XML/remap
     Point 4 - Important Notes-->
 
-    <remap from="/front/scan" to="/scan"/>
 
     <!-- Launching gazebo maze simulation -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/gazebo_launch.launch"/>
 
-    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/puzzlebot_gazebo.launch"/>
+        <!-- Load the URDF into the parameter server -->
+    <param name="robot_description" textfile="$(find puzzlebot_sim)/urdf/puzzlebot_jetson_ed_urdf.urdf" />
 
-    <!-- Launch robot control complete TF tree -->
-    <!--<include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/robot/control.launch"/>-->
 
-    <!-- Launching Rviz with mapping configuration (only uncomment when 
-    creating the map of the environment) -->
+    <!-- Run the robot_state_publisher -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+
+    <!-- Launch the joint state publisher -->
+    <node pkg="puzzlebot_sim" type="Joint_State_Publisher.py" name="Joint_State_Publisher" /> 
     
     <include file="$(find ros_stack_sim_jackal)/launch/include/rviz/rviz_launch_2d.launch"/>
 
-    <!-- Launching Rviz with navigation visualization -->
-    <!--<include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/>-->
-
-    <!-- Launching ROS Navigation Stack nodes -->
-    <!-- Launch gmapping node and move base to generate map of environment -->
-    <!-- This is only done one time to generate the map, it should be commented 
-    once the map is obtained -->
-    <!--<include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/start_mapping_2d.launch"/>-->
-
-    <!-- Launch map, localization and navigation -->
-    <!--<include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/start_navigating_2d.launch"/>-->
 
 </launch>
