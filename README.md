@@ -4,7 +4,7 @@ Este proyecto implementa un sistema de navegación autónoma para un robot móvi
 
 ## Descripción
 
-El objetivo de este proyecto es permitir que un robot móvil navegue de manera autónoma en un entorno desconocido, evitando obstáculos y alcanzando destinos especificados. El sistema de navegación se basa en la integración de varios componentes de ROS, incluyendo la percepción del entorno, la planificación de trayectorias y el control del movimiento.
+El objetivo futuro de este proyecto es permitir que un robot móvil navegue de manera autónoma en un entorno desconocido, evitando obstáculos y alcanzando destinos especificados. El sistema de navegación se basa en la integración de varios componentes de ROS, incluyendo la percepción del entorno, la planificación de trayectorias y el control del movimiento.
 
 - **Detección de Paredes y Obstáculos:** Se utiliza un LiDAR para detectar las paredes y los obstáculos en el mapa, permitiendo al robot evitar colisiones durante la navegación.
 - **Detección de Marcadores ArUco:** Se emplea una cámara para detectar marcadores ArUco en el entorno, lo que ayuda al robot a determinar su posición relativa y orientación.
@@ -22,17 +22,23 @@ El objetivo de este proyecto es permitir que un robot móvil navegue de manera a
 1. Clona este repositorio en tu espacio de trabajo de ROS:
 
 
-2. Compila el espacio de trabajo de ROS:
+2. Compila el espacio de trabajo de ROS: `catkin_make`
 
 
 3. Asegúrate de que todos los paquetes necesarios estén instalados y configurados correctamente en tu entorno de ROS.
+
+
+4. Toma en cuenta que cuando agregues nuevos archivos o carpetas asegurate de compilar el espacio de trabajo.
 
 ## Uso
 
 1. Inicia el sistema de ROS:
 
 
-2. ejecuta el comando desde la terminal `roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`
+2. Asegurate de tener la carpeta `puzzlebot_gazebo` en la ruta `home/user/catkin_ws/src` reemplazar user por tu nombre de usuario.
+
+
+3. ejecuta el comando desde la terminal `roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`
 
 ## Contribuciones
 
