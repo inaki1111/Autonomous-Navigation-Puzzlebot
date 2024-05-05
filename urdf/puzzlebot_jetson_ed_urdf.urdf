@@ -34,25 +34,25 @@
   </link>
 
   <!-- Left Wheel Link -->
-<link name="wl_link">
-  <inertial>
-    <origin xyz="0 0 0" />
-    <mass value="0.5"/>
-    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0002"/>
-  </inertial>
-  <collision>
-    <origin xyz="0 0 0" />
-    <geometry>
-      <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Left_Wheel.stl"/>
-    </geometry>
-  </collision>
-  <visual>
-    <origin xyz="0 0 0" />
-    <geometry>
-      <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Left_Wheel.stl"/>
-    </geometry>
-  </visual>
-</link>
+  <link name="wl_link">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.5"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0002"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265359"/>  <!-- Rotación de 180 grados en Z para la colisión -->
+      <geometry>
+        <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Left_Wheel.stl"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265359"/>  <!-- Rotación de 180 grados en Z para la visualización -->
+      <geometry>
+        <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Left_Wheel.stl"/>
+      </geometry>
+    </visual>
+  </link>
 
   <!-- Left Wheel Joint -->
   <joint name="leftWheel" type="continuous">
@@ -63,26 +63,25 @@
   </joint>
 
   <!-- Right Wheel Link -->
-<link name="wr_link">
-  <inertial>
-    <origin xyz="0 0 0" />
-    <mass value="0.5"/>
-    <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0002"/>
-  </inertial>
-  <collision>
-    <origin xyz="0 0 0" />
-    <geometry>
-      <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Right_Wheel.stl"/>
-    </geometry>
-  </collision>
-  <visual>
-    <origin xyz="0 0 0" />
-    <geometry>
-      <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Right_Wheel.stl"/>
-    </geometry>
-  </visual>
-</link>
-
+  <link name="wr_link">
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.5"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0002"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Right_Wheel.stl"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://puzzlebot_sim/models/MCR2_1000_13_Right_Wheel.stl"/>
+      </geometry>
+    </visual>
+  </link>
 
   <!-- Right Wheel Joint -->
   <joint name="rightWheel" type="continuous">
