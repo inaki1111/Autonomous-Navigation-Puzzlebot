@@ -1,3 +1,5 @@
+# Proyecto a Futuro de la Materia
+
 # Navegación Autónoma en ROS
 
 Este proyecto implementa un sistema de navegación autónoma para un robot móvil utilizando el Sistema Operativo de Robots (ROS).
@@ -10,14 +12,15 @@ El objetivo futuro de este proyecto es permitir que un robot móvil navegue de m
 - **Detección de Marcadores ArUco:** Se emplea una cámara para detectar marcadores ArUco en el entorno, lo que ayuda al robot a determinar su posición relativa y orientación.
 - **Filtro de Kalman:** Se implementa un filtro de Kalman para fusionar la información del LiDAR y la cámara y mejorar la precisión de la estimación de la posición y orientación del robot.
 
-## Requisitos del Sistema
+## Requisitos del Sistema a Futuro
 
 - ROS (Sistema Operativo de Robots) instalado. Se recomienda la distribución ROS Noetic.
 - Un robot móvil compatible con ROS.
 - Sensores de percepción del entorno, como cámaras o sensores láser.
-- Paquetes de navegación de ROS, como `move_base`, `map_server` y `amcl`.
 
 ## Instalación
+
+- actividad 1 del proyecto
 
 1. Clona este repositorio en tu espacio de trabajo de ROS:
 
@@ -36,6 +39,9 @@ El objetivo futuro de este proyecto es permitir que un robot móvil navegue de m
 
 
 2. Asegurate de tener la carpeta `puzzlebot_gazebo` en la ruta `home/user/catkin_ws/src` reemplazar user por tu nombre de usuario.
+
+
+3. Copiar la carpeta `map_test` en la carpeta oculta dentro de home que podemos visualisar utilizando el comando `ctrl + H` con el nombre `.gazebo`. Una vez encontrado pegala dentro de la carpeta `models`.
 
 
 3. ejecuta el comando desde la terminal `roslaunch arrow_autonomous_navigation_puzzlebot simulacion.launch`
