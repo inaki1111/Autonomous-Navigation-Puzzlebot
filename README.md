@@ -20,7 +20,7 @@ El objetivo futuro de este proyecto es permitir que un robot móvil navegue de m
 
 ## Actividad 1 de este proyecto a futuro.
 
-- Descripcion: Realizar jerarquia de carpetas para que funcionen archivos .launch, marcadores en Rviz (navegacion y mapeo),directorios y modelos de mapa tanto de robot a futuro.
+- Descripcion : Realizar jerarquia de carpetas para que funcionen archivos .launch, marcadores en Rviz (navegacion y mapeo),directorios y modelos de mapa tanto de robot a futuro.
 
 - Para esta primera actividad del proyecto, necesitas de realizar lo siguiente:
 
