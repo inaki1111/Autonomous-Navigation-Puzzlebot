@@ -18,7 +18,7 @@ El objetivo futuro de este proyecto es permitir que un robot móvil navegue de m
 - Un robot móvil compatible con ROS.
 - Sensores de percepción del entorno, como cámaras o sensores láser.
 
-## 1 actividad de este proyecto a futuro.
+## Actividad 1 de este proyecto a futuro.
 
 - Descripcion: Realizar jerarquia de carpetas para que funcionen archivos .launch, marcadores en Rviz (navegacion y mapeo),directorios y modelos de mapa tanto de robot a futuro.
 
