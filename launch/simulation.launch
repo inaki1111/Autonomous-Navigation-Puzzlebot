@@ -16,9 +16,6 @@
     <!-- Corregido el problema en esta línea -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/robot_in_gazebo.launch"/>
 
-    <!-- Launch robot control complete TF tree -->
-    <!--<include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/robot/control.launch"/>-->
-
     <!-- Launching Rviz with mapping configuration (only uncomment when 
     creating the map of the environment) -->
     
