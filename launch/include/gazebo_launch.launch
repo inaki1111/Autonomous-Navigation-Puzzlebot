@@ -1,0 +1,22 @@
+<!-- Gazebo launch file -->
+<launch>
+  <!-- Variables/arguments default declaration (used if not defined in shell when launching) -->
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui" default="true" /> <!--modificamos esta linea para poder abrir gazebo. Esto abrira las demas texturas para la actividad-->
+  <arg name="headless" default="false" />
+  <!-- Maze with obstacles to compare the two LiDARs -->
+  <!--<arg name="world_name" default="$(find arrow_autonomusnavigation_puzzlebot)/worlds/test_mode.world"/>-->
+  <!-- #Simple maze used to fine tune the algorithm before testing -->
+  <arg name="world_name" default="$(find arrow_autonomusnavigation_puzzlebot)/worlds/ADJIC_map.world"/> <!--modificamos el mapa que utilizaremos-->
+  <arg name="robot_configuration" default="complete" />
+
+  <!-- Launch Gazebo with the specified world #-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="0" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="world_name" value="$(arg world_name)" />
+  </include>
+
+</launch>
