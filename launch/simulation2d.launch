@@ -1,0 +1,31 @@
+<!-- Main launch file for simulation with 2D LiDAR -->
+<launch>
+    <!-- To use the same name as that of the 3D LiDAR -->
+    <remap from="/front/scan" to="/scan"/>
+
+    <!-- Launching gazebo maze simulation with additional parameters -->
+    <include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/robot_in_gazebo.launch"/> 
+
+    <!-- Launch robot spawning with additional parameters -->
+    <include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/robot/spawner2d.launch">
+        <arg name="x" value="0.8"/>
+        <arg name="y" value="-0.5"/>
+        <arg name="z" value="0.0"/>
+    </include>
+
+    <!-- Launch robot control complete TF tree -->
+    <include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/robot/control.launch"/>
+
+    <!-- Optionally, uncomment to launch Rviz with mapping configuration -->
+    <!--<include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/rviz/rviz_launch_2d.launch"/>-->
+
+    <!-- Launching Rviz with navigation visualization -->
+    <include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/> 
+
+    <!-- Launching ROS Navigation Stack nodes for mapping -->
+    <include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/start_mapping_2d.launch"/>
+    
+
+    <!-- Launch map, localization and navigation -->
+    <!--<include file="$(find arrow_autonomous_navigation_puzzlebot)/launch/include/start_navigating_2d.launch"/>-->
+</launch>

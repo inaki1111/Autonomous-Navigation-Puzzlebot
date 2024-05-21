@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+    <!-- Puzzlebot Parameters -->
+    <arg name="robot" default="puzzlebot_1"/>
+    <arg name="robot_description_file" default="puzzlebot_lidar.xacro"/>
+    <arg name="x" default="0.8"/> <!--valores donde comienza nuestra pista-->
+    <arg name="y" default="-0.5"/>
+    <arg name="z" default="0.0"/>
+    <arg name="yaw" default="0.0"/>
+
+    <!-- Gazebo Parameters -->
+    <arg name="world_name" default="$(find arrow_autonomusnavigation_puzzlebot)/worlds/ADJIC_map.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+
+    <!-- Ensure all nodes use simulation time -->
+    <param name="/use_sim_time" value="true"/>
+
+    <!-- PID Parameters -->
+    <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
+
+    <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
+
+    <!-- Load robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+
+    <!-- Launch Gazebo -->
+    <node name="gazebo" pkg="gazebo_ros" type="gazebo" output="screen"
+          args="-s libgazebo_ros_factory.so $(arg world_name)" />
+
+    <!-- Robot State Publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+    </node>
+
+    <!-- Spawn the robot in Gazebo -->
+    <node name="puzzlebot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model $(arg robot) -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)" />
+
+    <!-- Custom Python Nodes -->
+    <node name="Joint_State_Publisher" pkg="arrow_autonomusnavigation_puzzlebot" type="Joint_State_Publisher.py" output="screen"/> 
+    <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation.py" output="screen"/>     
+    <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform.py" output="screen"/>     
+
+    <!-- Keyboard Control Python Node -->
+    <node name="keyboard_control" pkg="arrow_autonomusnavigation_puzzlebot" type="keyboard_control.py" output="screen"/>
+
+    <!-- Gmapping Node -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+        <param name="odom_frame" value="odom"/>
+        <param name="map_frame" value="map"/>
+        <param name="base_frame" value="base_link"/>
+        <param name="delta" value="0.01"/>
+        <param name="linearUpdate" value="0.01"/>
+        <param name="angularUpdate" value="0.02"/>
+        <param name="xmin" value="-10.0"/>
+        <param name="ymin" value="-10.0"/>
+        <param name="xmax" value="10.0"/>
+        <param name="ymax" value="10.0"/>
+        <param name="maxUrange" value="5.6"/>
+        <param name="maxRange" value="10.0"/>
+        <remap from="scan" to="/base_scan"/>
+    </node>
+
+</launch>
+
+
+
