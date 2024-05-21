@@ -1,0 +1,25 @@
+DWAPlannerROS:
+  max_vel_trans: 0.1  # Actualiza este valor según tu configuración
+  min_vel_trans: 0.1   # Actualiza este valor según tu configuración
+  max_vel_x: 0.1      # Actualiza este valor según tu configuración
+  min_vel_x: 0.1       # Actualiza este valor según tu configuración
+  max_vel_y: 0.0       # Mantener en 0 para un robot diferencial
+  min_vel_y: 0.0       # Mantener en 0 para un robot diferencial
+  max_vel_theta: 0.1   # Actualiza este valor según tu configuración
+  min_vel_theta: -0.1  # Actualiza este valor según tu configuración
+  acc_lim_x: 0.1       # Actualiza este valor según tu configuración
+  acc_lim_y: 0.0       # Mantener en 0 para un robot diferencial
+  acc_lim_theta: 0.1   # Actualiza este valor según tu configuración
+  xy_goal_tolerance: 0.2
+  yaw_goal_tolerance: 0.1
+  sim_time: 1.7
+  vx_samples: 20
+  vy_samples: 0       # Mantener en 0 para un robot diferencial
+  vtheta_samples: 40
+  controller_frequency: 10.0
+  forward_point_distance: 0.325
+  stop_time_buffer: 0.2
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+  occdist_scale: 0.01
+  oscillation_reset_dist: 0.05

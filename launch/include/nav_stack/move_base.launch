@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <launch>
     <!-- Move Base Node -->
     <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
@@ -8,24 +6,22 @@
         <param name="controller_frequency" value="10.0"/>
         <param name="planner_frequency" value="5.0"/>
 
-        <!-- Configurar parámetros de localización -->
-        <param name="global_costmap/robot_base_frame" value="base_link"/>
-        <param name="global_costmap/global_frame" value="map"/>
-        <param name="local_costmap/robot_base_frame" value="base_link"/>
-        <param name="local_costmap/global_frame" value="odom"/>
-
         <!-- Global Costmap -->
         <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmap_common_params.yaml" command="load" ns="global_costmap"/>
-        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/global_costmap_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/global_costmap_params.yaml" command="load"/>
 
         <!-- Local Costmap -->
         <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmap_common_params.yaml" command="load" ns="local_costmap"/>
-        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/local_costmap_params.yaml" command="load" ns="local_costmap"/>
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/local_costmap_params.yaml" command="load"/>
 
         <!-- Local Planner -->
         <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/base_local_planner_params.yaml" command="load"/>
 
         <!-- Recovery Behaviors -->
-        <param name="recovery_behaviors" value="[{'name': 'conservative_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'}, {'name': 'aggressive_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'}]"/>
+        <!-- Uncomment if needed
+        <rosparam param="recovery_behaviors">
+          [{'name': 'conservative_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'},
+           {'name': 'aggressive_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'}]
+        </rosparam> -->
     </node>
 </launch>

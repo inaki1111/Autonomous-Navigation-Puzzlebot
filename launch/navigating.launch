@@ -46,10 +46,8 @@
     <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation.py" output="screen"/>     
     <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform.py" output="screen"/>     
 
-
     <!-- Navigation Nodes -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/amcl.launch"/>
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/move_base.launch"/>
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/>
-
 </launch>
