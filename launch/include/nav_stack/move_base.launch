@@ -16,12 +16,5 @@
 
         <!-- Local Planner -->
         <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/base_local_planner_params.yaml" command="load"/>
-
-        <!-- Recovery Behaviors -->
-        <!-- Uncomment if needed
-        <rosparam param="recovery_behaviors">
-          [{'name': 'conservative_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'},
-           {'name': 'aggressive_reset', 'type': 'clear_costmap_recovery/ClearCostmapRecovery'}]
-        </rosparam> -->
     </node>
 </launch>
