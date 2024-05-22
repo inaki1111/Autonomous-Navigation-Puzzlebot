@@ -1,17 +1,17 @@
 global_costmap:
   global_frame: map
   robot_base_frame: base_link
-  update_frequency: 1.0
-  publish_frequency: 0.5
-  width: 10.0
-  height: 10.0
-  resolution: 0.05
+  update_frequency: 20.0
+  publish_frequency: 20.0
+  width: 4.0
+  height: 4.0
+  resolution: 0.01
   rolling_window: false
 #In charge of inflating (blue color in RVIZ) each cell with an obstacle
   inflater_layer:
   #inflation_radius: 0.30
   #Increased for better detecting obstacles
-    inflation_radius: 0.30 #Default: 0.55
+    inflation_radius: 0.25 #Default: 0.55
   #Scaling factor to apply cost values during inflation
   #cost_scaling_factor: 10.0 #Default: 10.0
 

@@ -1,58 +1,43 @@
 DWAPlannerROS:
-#Robot Configuration parameters
-  acc_lim_x: 2.0  # Incrementado para permitir una aceleración más rápida
+  # Robot Configuration parameters
+  acc_lim_x: 2.0
   acc_lim_y: 0.0
-  acc_lim_theta: 3.5  # Ajustado para permitir aceleraciones angulares rápidas pero controladas
-  max_vel_x: 0.4  # Moderadamente reducido para un movimiento controlado
-  min_vel_x: 0.0  # Permite que el robot se detenga completamente antes de girar
-  max_vel_y : 0.0
+  acc_lim_theta: 3.5
+  max_vel_x: 0.4
+  min_vel_x: 0.0
+  max_vel_y: 0.0
   min_vel_y: 0.0
   max_vel_trans: 0.55
   min_vel_trans: 0.1
-  max_vel_theta: 0.9  # Aumentado para permitir giros más rápidos pero controlados
-  max_vel_rot: 1.0
-  min_vel_rot: 0.4  
+  max_vel_theta: 1.2  # Incrementado para permitir giros más rápidos
+  min_vel_theta: 0.3  # Aumentado para permitir giros más controlados en el lugar
 
-  #go tolerance parameters
+  # Goal tolerance parameters
+  xy_goal_tolerance: 0.1
+  yaw_goal_tolerance: 0.1  # Aumentado para permitir un margen de error mayor en giros
+  latch_xy_goal_tolerance: false
 
-  xy_goal_tolerance: 0.1  # Reducido para mayor precisión
-  yaw_goal_tolerance: 0.05  # Reducido para mayor precisión
-  latch_xy_goal_tolerance: false  # Deshabilitado para mayor precisión
-
-  #formward smulation parameters
-
-  sim_time: 1.7  # Mantener bajo para mayor respuesta
+  # Forward simulation parameters
+  sim_time: 2.0  # Incrementado para darle más tiempo para simular giros
   sim_granularity: 0.025
-
-  min_in_place_vel_theta: 0.3  # Moderadamente reducido para giros más controlados en el lugar
-  min_vel_theta: -0.9  # Ajustado para permitir giros más rápidos en reversa
-  acc_lim_trans: 2.0  # Incrementado para permitir una aceleración más rápida
-  max_trans_vel: 0.4  # Moderadamente reducido para un movimiento controlado
-  min_trans_vel: 0.0  # Permite que el robot se detenga completamente antes de girar
-  vx_samples: 3
-  vtheta_samples: 20  # Mantener alto para mayor variedad de giros
+  min_in_place_vel_theta: 0.4  # Moderadamente reducido para giros más controlados en el lugar
+  acc_lim_trans: 2.0
+  vx_samples: 20  # Reducido para disminuir la carga del sistema
+  vtheta_samples: 30  # Reducido para disminuir la carga del sistema
   controller_frequency: 20.0
   
-  #trajectory scoring parameters
-  
-  path_distance_bias: 32.0
-  goal_distance_bias: 24.0
+  # Trajectory scoring parameters
+  path_distance_bias: 24.0
+  goal_distance_bias: 32.0
   occdist_scale: 0.01
   forward_point_distance: 0.325
   stop_time_buffer: 0.2
   scaling_speed: 0.25
   max_scaling_factor: 0.2
-
   publish_cost_grid: false
 
-
-
-#oscilation parameters
-
+  # Oscillation parameters
   oscillation_reset_dist: 0.05
 
-# global plan parameters
-
+  # Global plan parameters
   prune_plan: true
-
-

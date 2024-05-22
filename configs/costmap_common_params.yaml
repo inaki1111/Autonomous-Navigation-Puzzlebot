@@ -1,5 +1,5 @@
-obstacle_range: 1.0
-raytrace_range: 0.5
+obstacle_range: 0.5
+raytrace_range: 1.0
 robot_radius: 0.12
 obstacles_layer: 
   observation_sources: scan
