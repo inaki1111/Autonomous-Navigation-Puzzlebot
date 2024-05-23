@@ -15,5 +15,5 @@ global_costmap:
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
 
   inflation_layer:
-    inflation_radius: 0.3  # Reducido para disminuir el área de inflación
+    inflation_radius: 0.22  # Reducido para disminuir el área de inflación
     cost_scaling_factor: 10.0  # Ajusta según sea necesario para cambiar cómo decrece el costo con la distancia desde un obstáculo

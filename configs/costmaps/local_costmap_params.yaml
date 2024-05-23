@@ -1,0 +1,17 @@
+local_costmap:
+  global_frame: odom  # Cambiado a 'odom' para una actualización dinámica
+  robot_base_frame: base_link
+  update_frequency: 10.0
+  publish_frequency: 5.0
+  width: 5.0  # Ajustado para cubrir un área mayor alrededor del robot
+  height: 5.0  # Ajustado para cubrir un área mayor alrededor del robot
+  resolution: 0.05
+  rolling_window: true  # Activado para mantener el costmap centrado en el robot
+  plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacles_layer, type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
+  inflation_layer:
+    inflation_radius: 0.22  # Ajustado para un mejor equilibrio de inflación
+    cost_scaling_factor: 10.0  # Aumentado para mejorar la evitación de obstáculos
