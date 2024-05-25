@@ -2,14 +2,15 @@
     <!-- Argumentos para conectar al robot real -->
     <arg name="robot_ip" default="192.168.1.9"/> <!-- IP del robot en la red -->
 
-    <!--parametros para iniciar el puzzlebot-->
+    <!-- Parámetros para iniciar el puzzlebot -->
+    <node pkg="tf" type="static_transform_publisher" name="base_laser_to_laser_tf" args="0 0 0 0 0 1 0 base_laser_link laser 100" />
 
     <include file="$(find autonomous_navigation)/launch/robot_mapping.launch"/>
 
-
-
     <!-- Remapeo de tópicos para comunicarse con el robot -->
-    <node pkg="topic_tools" type="relay" name="relay_base_scan" args="/robot/base_scan /base_scan"/>
+    <!-- Nodo para remapear /scan a /base_scan -->
+    <node pkg="topic_tools" type="relay" name="scan_to_base_scan_relay" args="/scan /base_scan"/>
+
     <node pkg="topic_tools" type="relay" name="relay_wheel_left" args="/robot/wheel_left /wheel_left"/>
     <node pkg="topic_tools" type="relay" name="relay_wheel_right" args="/robot/wheel_right /wheel_right"/>
 
@@ -17,14 +18,13 @@
     <node pkg="topic_tools" type="relay" name="relay_cmd_vel" args="/cmd_vel /robot/cmd_vel"/>
 
     <!-- Custom Python Nodes -->
-    <node name="Joint_State_Publisher" pkg="arrow_autonomusnavigation_puzzlebot" type="Joint_State_Publisher.py" output="screen"/>
-    <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation.py" output="screen"/>
-    <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform.py" output="screen"/>
-    
+    <node name="Joint_State_Publisher" pkg="arrow_autonomusnavigation_puzzlebot" type="Joint_State_Publisher_python2.py" output="screen"/>
+    <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation_python2.py" output="screen"/>
+    <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform_python2.py" output="screen"/>
 
     <!-- Navigation Nodes -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/amcl.launch"/>
-    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/move_base.launch"/>
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/real_robot_move_base.launch"/>
 
     <!-- Parámetros de tiempo de simulación -->
     <param name="/use_sim_time" value="false"/>

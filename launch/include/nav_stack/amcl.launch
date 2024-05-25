@@ -7,7 +7,7 @@
   <arg name="initial_pose_a" default="-1.5708"/>
 
   <!-- Map Server Node -->
-  <node pkg="map_server" type="map_server" name="map_server" args="$(find arrow_autonomusnavigation_puzzlebot)/maps/laberinto_salon.yaml"/>
+  <node pkg="map_server" type="map_server" name="map_server" args="$(find arrow_autonomusnavigation_puzzlebot)/maps/cocina.yaml"/>
 
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
     <param name="use_map_topic" value="$(arg use_map_topic)"/>

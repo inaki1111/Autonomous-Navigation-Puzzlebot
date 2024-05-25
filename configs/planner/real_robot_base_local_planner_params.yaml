@@ -13,18 +13,18 @@ DWAPlannerROS:
   min_vel_theta: 0.2  # Permitir giros suaves
 
   # Parámetros de tolerancia del objetivo
-  xy_goal_tolerance: 0.15  # Mayor tolerancia para flexibilidad en el objetivo
-  yaw_goal_tolerance: 0.1  # Mantener precisión en giros
+  xy_goal_tolerance: 0.07  # Mayor tolerancia para flexibilidad en el objetivo
+  yaw_goal_tolerance: 0.07  # Mantener precisión en giros
   latch_xy_goal_tolerance: false  # Mantener deshabilitado para mayor precisión
 
   # Parámetros de simulación hacia adelante
-  sim_time: 3.0  # Reducir el tiempo de simulación para responder más rápido a cambios
+  sim_time: 2.0  # Reducir el tiempo de simulación para responder más rápido a cambios
   sim_granularity: 0.025
   min_in_place_vel_theta: 0.2  # Permitir giros suaves en el lugar
   acc_lim_trans: 0.5  # Limitar aceleraciones de translación
-  vx_samples: 20  # Reducir para disminuir la carga computacional
-  vtheta_samples: 40  # Reducir para menos opciones de giros
-  controller_frequency: 5.0  # Mantener frecuencia de control
+  vx_samples: 15  # Reducir para disminuir la carga computacional
+  vtheta_samples: 20  # Reducir para menos opciones de giros
+  controller_frequency: 3.0  # Reducir la frecuencia de control para menor carga computacional
 
   # Parámetros de puntuación de trayectorias
   path_distance_bias: 5.0  # Mantener para seguir el camino planificado
@@ -34,13 +34,13 @@ DWAPlannerROS:
   stop_time_buffer: 0.2
   scaling_speed: 0.25
   max_scaling_factor: 0.2
-  publish_cost_grid: false
+  publish_cost_grid: false  # Desactivar para reducir la carga computacional
 
   # Parámetros de oscilación
   oscillation_reset_dist: 0.05
 
   # Parámetros de plan global
-  prune_plan: true
+  prune_plan: true  # Mantener activado para limpiar el plan de rutas no necesarias
 
   # Parámetros adicionales para mejorar giros en el lugar
   rot_stopped_vel: 0.1  # Velocidad angular mínima para considerar que el robot está detenido

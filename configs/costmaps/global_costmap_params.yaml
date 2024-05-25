@@ -2,12 +2,11 @@
 global_costmap:
   global_frame: map  # Mantener 'map' como el marco global para el costmap global
   robot_base_frame: base_link
-  update_frequency: 5.0  # Reducido para coincidir con la frecuencia del controlador
-  publish_frequency: 5.0
+  update_frequency: 3.0  # Reducido para coincidir con la frecuencia del controlador
+  publish_frequency: 3.0
   width: 10.0  # Ajusta según el tamaño adecuado para tu entorno
   height: 10.0
   resolution: 0.05  # Verifica que la resolución sea adecuada para la detección de obstáculos
-  static_map: true
   rolling_window: false  # Fijo en el mapa global
   plugins:
     - {name: static_layer, type: "costmap_2d::StaticLayer"}
@@ -15,5 +14,5 @@ global_costmap:
     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
 
   inflation_layer:
-    inflation_radius: 0.22  # Reducido para disminuir el área de inflación
-    cost_scaling_factor: 10.0  # Ajusta según sea necesario para cambiar cómo decrece el costo con la distancia desde un obstáculo
+    inflation_radius: 0.25  # Reducido para disminuir el área de inflación
+    cost_scaling_factor: 5.0  # Ajusta según sea necesario para cambiar cómo decrece el costo con la distancia desde un obstáculo
