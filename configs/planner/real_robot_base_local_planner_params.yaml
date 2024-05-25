@@ -1,0 +1,47 @@
+DWAPlannerROS:
+  # Parámetros de configuración del robot
+  acc_lim_x: 0.5  # Limitar aceleraciones lineales para mayor control
+  acc_lim_y: 0.0
+  acc_lim_theta: 1.0  # Mantener aceleraciones angulares moderadas
+  max_vel_x: 0.2  # Limitar velocidad máxima lineal
+  min_vel_x: 0.05  # Permitir que el robot se detenga completamente antes de girar
+  max_vel_y: 0.0
+  min_vel_y: 0.0
+  max_vel_trans: 0.2  # Limitar velocidad máxima de translación
+  min_vel_trans: 0.05
+  max_vel_theta: 1.0  # Limitar velocidad angular máxima
+  min_vel_theta: 0.2  # Permitir giros suaves
+
+  # Parámetros de tolerancia del objetivo
+  xy_goal_tolerance: 0.15  # Mayor tolerancia para flexibilidad en el objetivo
+  yaw_goal_tolerance: 0.1  # Mantener precisión en giros
+  latch_xy_goal_tolerance: false  # Mantener deshabilitado para mayor precisión
+
+  # Parámetros de simulación hacia adelante
+  sim_time: 3.0  # Reducir el tiempo de simulación para responder más rápido a cambios
+  sim_granularity: 0.025
+  min_in_place_vel_theta: 0.2  # Permitir giros suaves en el lugar
+  acc_lim_trans: 0.5  # Limitar aceleraciones de translación
+  vx_samples: 20  # Reducir para disminuir la carga computacional
+  vtheta_samples: 40  # Reducir para menos opciones de giros
+  controller_frequency: 5.0  # Mantener frecuencia de control
+
+  # Parámetros de puntuación de trayectorias
+  path_distance_bias: 5.0  # Mantener para seguir el camino planificado
+  goal_distance_bias: 10.0  # Mantener para enfoque directo al objetivo
+  occdist_scale: 0.01  # Mantener sensibilidad a los obstáculos
+  forward_point_distance: 0.325
+  stop_time_buffer: 0.2
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+  publish_cost_grid: false
+
+  # Parámetros de oscilación
+  oscillation_reset_dist: 0.05
+
+  # Parámetros de plan global
+  prune_plan: true
+
+  # Parámetros adicionales para mejorar giros en el lugar
+  rot_stopped_vel: 0.1  # Velocidad angular mínima para considerar que el robot está detenido
+  trans_stopped_vel: 0.1  # Velocidad lineal mínima para considerar que el robot está detenido
