@@ -2,21 +2,11 @@
     <!-- Argumentos para conectar al robot real -->
     <arg name="robot_ip" default="192.168.1.9"/> <!-- IP del robot en la red -->
 
-    <!-- Puzzlebot Parameters -->
-    <arg name="robot" default="puzzlebot_1"/>
-    <arg name="robot_description_file" default="puzzlebot_lidar.xacro"/>
-    <arg name="x" default="0.8"/>
-    <arg name="y" default="-0.5"/>
-    <arg name="z" default="0.0"/>
-    <arg name="yaw" default="0.0"/>
+    <!--parametros para iniciar el puzzlebot-->
 
-    <!-- Publicar descripción del robot desde la laptop -->
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+    <include file="$(find autonomous_navigation)/launch/robot_mapping.launch"/>
 
-    <!-- Robot State Publisher -->
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
-    </node>
+
 
     <!-- Remapeo de tópicos para comunicarse con el robot -->
     <node pkg="topic_tools" type="relay" name="relay_base_scan" args="/robot/base_scan /base_scan"/>
@@ -31,11 +21,6 @@
     <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation.py" output="screen"/>
     <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform.py" output="screen"/>
     
-
-    <!-- PID Parameters -->
-    <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
-
-    <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
 
     <!-- Navigation Nodes -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/amcl.launch"/>
