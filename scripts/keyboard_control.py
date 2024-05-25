@@ -12,8 +12,8 @@ class KeyboardControl:
     def __init__(self):
         rospy.init_node('keyboard_control')
         self.pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
-        self.speed = 0.5  # Velocidad lineal
-        self.turn = 0.5   # Velocidad angular
+        self.speed = 0.1  # Velocidad lineal
+        self.turn = 0.1   # Velocidad angular
 
     def getKey(self):
         if os.name == 'nt':

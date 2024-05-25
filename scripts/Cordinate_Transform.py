@@ -22,7 +22,7 @@ class TfBroadcaster():
 
         self.my_tf_br = tf2_ros.TransformBroadcaster()
 
-        r = rospy.Rate(50)  # Frecuencia de publicación de 50 Hz
+        r = rospy.Rate(60)  # Frecuencia de publicación de 50 Hz
 
         while not rospy.is_shutdown():
             # Crear la transformación

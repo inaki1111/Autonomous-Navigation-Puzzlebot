@@ -1,0 +1,20 @@
+<launch>
+    <!-- Move Base Node -->
+    <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+        <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+        <param name="controller_frequency" value="5.0"/>
+        <param name="planner_frequency" value="5.0"/>
+
+        <!-- Global Costmap -->
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmaps/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmaps/global_costmap_params.yaml" command="load"/>
+
+        <!-- Local Costmap -->
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmaps/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/costmaps/local_costmap_params.yaml" command="load"/>
+
+        <!-- Local Planner -->
+        <rosparam file="$(find arrow_autonomusnavigation_puzzlebot)/configs/planner/real_robot_base_local_planner_params.yaml" command="load"/>
+    </node>
+</launch>
