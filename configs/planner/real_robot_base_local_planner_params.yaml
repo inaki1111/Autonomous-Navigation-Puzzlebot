@@ -1,47 +1,45 @@
 DWAPlannerROS:
-  # Parámetros de configuración del robot
-  acc_lim_x: 0.5  # Limitar aceleraciones lineales para mayor control
+  acc_lim_x: 0.3
   acc_lim_y: 0.0
-  acc_lim_theta: 1.0  # Mantener aceleraciones angulares moderadas
-  max_vel_x: 0.2  # Limitar velocidad máxima lineal
-  min_vel_x: 0.05  # Permitir que el robot se detenga completamente antes de girar
+  acc_lim_theta: 1.5
+
+  max_vel_x: 0.25
+  min_vel_x: 0.1
   max_vel_y: 0.0
   min_vel_y: 0.0
-  max_vel_trans: 0.2  # Limitar velocidad máxima de translación
+
+  max_vel_trans: 0.25
   min_vel_trans: 0.05
-  max_vel_theta: 1.0  # Limitar velocidad angular máxima
-  min_vel_theta: 0.2  # Permitir giros suaves
 
-  # Parámetros de tolerancia del objetivo
-  xy_goal_tolerance: 0.07  # Mayor tolerancia para flexibilidad en el objetivo
-  yaw_goal_tolerance: 0.07  # Mantener precisión en giros
-  latch_xy_goal_tolerance: false  # Mantener deshabilitado para mayor precisión
+  max_vel_theta: 2.5
+  min_vel_theta: -2.5
 
-  # Parámetros de simulación hacia adelante
-  sim_time: 2.0  # Reducir el tiempo de simulación para responder más rápido a cambios
+  xy_goal_tolerance: 0.02
+  yaw_goal_tolerance: 0.01
+  latch_xy_goal_tolerance: false
+
+  sim_time: 2.5
   sim_granularity: 0.025
-  min_in_place_vel_theta: 0.2  # Permitir giros suaves en el lugar
-  acc_lim_trans: 0.5  # Limitar aceleraciones de translación
-  vx_samples: 15  # Reducir para disminuir la carga computacional
-  vtheta_samples: 20  # Reducir para menos opciones de giros
-  controller_frequency: 3.0  # Reducir la frecuencia de control para menor carga computacional
+  min_in_place_vel_theta: 0.05
+  acc_lim_trans: 0.7
+  vx_samples: 10
+  vtheta_samples: 60
 
-  # Parámetros de puntuación de trayectorias
-  path_distance_bias: 5.0  # Mantener para seguir el camino planificado
-  goal_distance_bias: 10.0  # Mantener para enfoque directo al objetivo
-  occdist_scale: 0.01  # Mantener sensibilidad a los obstáculos
+  controller_frequency: 3.0
+
+  path_distance_bias: 70.0
+  goal_distance_bias: 20.0
+  occdist_scale: 0.01
   forward_point_distance: 0.325
   stop_time_buffer: 0.2
   scaling_speed: 0.25
   max_scaling_factor: 0.2
-  publish_cost_grid: false  # Desactivar para reducir la carga computacional
 
-  # Parámetros de oscilación
+  publish_cost_grid: false
+
   oscillation_reset_dist: 0.05
 
-  # Parámetros de plan global
-  prune_plan: true  # Mantener activado para limpiar el plan de rutas no necesarias
+  prune_plan: true
 
-  # Parámetros adicionales para mejorar giros en el lugar
-  rot_stopped_vel: 0.1  # Velocidad angular mínima para considerar que el robot está detenido
-  trans_stopped_vel: 0.1  # Velocidad lineal mínima para considerar que el robot está detenido
+  rot_stopped_vel: 0.1
+  trans_stopped_vel: 0.1
