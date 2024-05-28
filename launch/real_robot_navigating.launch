@@ -30,6 +30,9 @@
 
     <!-- Navigation Nodes -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/amcl.launch"/>
-    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/real_robot_move_base.launch"/>
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/move_base.launch"/>
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/>
+
+    <!-- Parámetros de tiempo de simulación -->
+    <param name="/use_sim_time" value="false"/>
 </launch>

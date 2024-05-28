@@ -1,0 +1,43 @@
+<launch>
+    <!-- Argumentos para configurar la conexión con el robot real -->
+    <arg name="robot_ip" default="192.168.1.9"/> <!-- IP del robot en la red -->
+    <arg name="robot" default="puzzlebot_1"/>
+    <arg name="robot_description_file" default="puzzlebot_lidar.xacro"/>
+
+    <!-- Parámetros para iniciar el puzzlebot con una transformación estática para el láser -->
+    <node pkg="tf" type="static_transform_publisher" name="base_laser_to_laser_tf" args="0 0 0 0 0 1 0 base_laser_link laser 100" />
+
+    <!-- Remapeo de tópicos para comunicarse con el robot -->
+    <node pkg="topic_tools" type="relay" name="scan_to_base_scan_relay" args="/scan /base_scan"/>
+    <node pkg="topic_tools" type="relay" name="relay_wheel_left" args="/robot/wheel_left /wheel_left"/>
+    <node pkg="topic_tools" type="relay" name="relay_wheel_right" args="/robot/wheel_right /wheel_right"/>
+
+    <!-- Publicador a cmd_vel del robot real -->
+    <node pkg="topic_tools" type="relay" name="relay_cmd_vel" args="/cmd_vel /robot/cmd_vel"/>
+
+    <!-- Nodos personalizados en Python para manejo del estado y localización -->
+    <node name="Joint_State_Publisher" pkg="arrow_autonomusnavigation_puzzlebot" type="Joint_State_Publisher_python2.py" output="screen"/>
+    <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation_python2.py" output="screen"/>
+    <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform_python2.py" output="screen"/>
+
+    <!-- Inclusión de archivos de lanzamiento para mapeo y navegación -->
+    <include file="$(find autonomous_navigation)/launch/robot_mapping.launch"/>
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/amcl.launch"/>
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/nav_stack/real_robot_move_base.launch"/>
+
+
+    <!-- Publicar descripción del robot desde la laptop -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+
+    <!-- PID Parameters -->
+    <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
+    <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
+
+    <!-- Robot State Publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+    </node>
+
+    <!-- Parámetro de tiempo de simulación, desactivado para el robot real -->
+    <param name="/use_sim_time" value="false"/>
+</launch>
