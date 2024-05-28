@@ -14,10 +14,6 @@
     <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
     <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
 
-    <!-- Robot State Publisher -->
-    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
-    </node>
 
     <!-- RViz -->
     <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/>
