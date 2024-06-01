@@ -3,7 +3,8 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /Camera Image1
       Splitter Ratio: 0.5
     Tree Height: 463
   - Class: rviz/Selection
@@ -295,7 +296,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /camera/image_raw
+      Image Topic: /video_source/raw
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -349,9 +350,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.32479703426361084
+      Pitch: 0.6397967338562012
       Target Frame: <Fixed Frame>
-      Yaw: 3.6804144382476807
+      Yaw: 4.635430335998535
     Saved: ~
 Window Geometry:
   Camera Image:

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Parámetros de la red del robot -->
+    <arg name="robot_ip" default="10.42.0.1"/>
+
+    <!-- Parámetros del Puzzlebot -->
+    <arg name="robot" default="puzzlebot_1"/>
+    <arg name="robot_description_file" default="puzzlebot_lidar.xacro"/>
+
+    <!-- Publicar descripción del robot desde la laptop -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+
+    <!-- PID Parameters -->
+    <node name="puzzlebot_controller" pkg="puzzlebot_control" type="puzzlebot_control_node"/>
+    <include file="$(find puzzlebot_control)/launch/puzzlebot_control.launch"/>
+
+
+    <!-- RViz -->
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/include/rviz/rviz_launch_nav_2d.launch"/>
+
+    <!-- Parámetros de tiempo de simulación -->
+    <param name="/use_sim_time" value="false"/>
+</launch>
