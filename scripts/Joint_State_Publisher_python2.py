@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import rospy
 from sensor_msgs.msg import JointState
@@ -56,13 +57,13 @@ class JointsToPublish():
         self.theta_l = self.theta_l + self.wl * self.dt
         self.theta_r = self.theta_r + self.wr * self.dt
 
-        return self.theta_r, self.theta_r #TE FALTO AQUI EL RETURN JAJA
+        return self.theta_l, self.theta_r
 
     def run(self):
         try:
             while not rospy.is_shutdown():
                 # Calcular las velocidades angulares de las ruedas
-                self.calculate_wheel_velocities()
+                self.theta_l, self.theta_r = self.calculate_wheel_velocities()
 
                 # Actualizar el estado de las articulaciones
                 self.contJoints.header.stamp = rospy.Time.now()

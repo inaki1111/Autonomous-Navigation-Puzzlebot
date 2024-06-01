@@ -1,4 +1,4 @@
-#!/usr/bin/env python3  
+#!/usr/bin/env python 
 
 import rospy  
 
@@ -41,19 +41,19 @@ class AutonomousNav():
 		self.x_r = 0
 		self.y_r = 0
 
-		self.x_target= -1.3 #x position of the goal 
+		self.x_target= 1.35 #x position of the goal
 
-		self.y_target= 1.5 #y position of the goal 
+		self.y_target= 1.0 #y position of the goal 
 
 		self.goal_received = 1 #flag to indicate if the goal has been received 
 
 		self.lidar_received = 0 #flag to indicate if the laser scan has been received 
 
-		self.target_position_tolerance=0.29 #acceptable distance to the goal to declare the robot has arrived to it [m] 
+		self.target_position_tolerance=0.1 #acceptable distance to the goal to declare the robot has arrived to it [m] 
 
-		d_fw = 0.35 # distance from closest obstacle to activate the avoid obstacle behavior [m] # dFw 
+		d_fw = 0.25 # distance from closest obstacle to activate the avoid obstacle behavior [m] # dFw 
 
-		v_msg=Twist() #Robot's desired speed  
+		v_msg=Twist() #Robot's desired speed
 
 		self.wr = 0 #right wheel speed [rad/s]
 
@@ -62,25 +62,25 @@ class AutonomousNav():
 		self.current_state = 'GoToGoal' #Robot's current state 
 
 		# inicializamos y definimos ganancias para goal to goal 
-		self.k_v = 0.1
-		self.k_w = 0.9
+		self.k_v = 0.06
+		self.k_w = 0.7
 
 		#definimos minimo progreso requerido para ir a goal to goal
-		self.minprogress = 2.8
+		self.minprogress = 0.01
 
 		###******* INIT PUBLISHERS *******###
 
-		self.pub_cmd_vel = rospy.Publisher('puzzlebot_1/base_controller/cmd_vel', Twist, queue_size=1)  
+		self.pub_cmd_vel = rospy.Publisher('cmd_vel', Twist, queue_size=1)  
 
 		############################### SUBSCRIBERS #####################################  
 
-		rospy.Subscriber("puzzlebot_1/wl", Float32, self.wl_cb)  
+		rospy.Subscriber("wl", Float32, self.wl_cb)  
 
-		rospy.Subscriber("puzzlebot_1/wr", Float32, self.wr_cb)
+		rospy.Subscriber("wr", Float32, self.wr_cb)
 
 		rospy.Subscriber("odom", Odometry, self.update_pos_cb) 
 
-		rospy.Subscriber("puzzlebot_1/scan", LaserScan, self.laser_cb) 
+		rospy.Subscriber("scan", LaserScan, self.laser_cb) 
 
 		#********** FRECUENCIA Y SAMPLING TIME **********###  
 
@@ -142,7 +142,7 @@ class AutonomousNav():
 						# CALCULAR DISTANCIA ANTERIOR, h1
 
 						self.dGTG_h = np.sqrt((self.x_target - self.x_r) ** 2 + (self.y_target - self.y_r) ** 2)
-						print("distancia anterior de GoalToGoal en FWC" + str(self.dGTG_h))
+						#print("distancia anterior de GoalToGoal en FWC" + str(self.dGTG_h))
 
 						# CAMBIAMOS DE INMEDIATO DE ESTADO
 						self.current_state = 'FollowingWallClockwise'
@@ -155,12 +155,11 @@ class AutonomousNav():
 						# CALCULAR DISTANCIA ANTERIOR, h1
 
 						self.dGTG_h = np.sqrt((self.x_target - self.x_r) ** 2 + (self.y_target - self.y_r) ** 2)
-						print("distancia anterior de GoalToGoal en FCC" + str (self.dGTG_h))
+						#print("distancia anterior de GoalToGoal en FCC" + str (self.dGTG_h))
 
 						# CAMBIAMOS DE INMEDIATO DE ESTADO
 						self.current_state = 'FollowingWallCounterClockwise'
-					
-					
+
 					# TERCERA COMPARACION EN GO TO GOAL ----
 					# DETENER EL ROBOT
 					elif np.sqrt((self.x_target - self.x_r) ** 2 + (self.y_target - self.y_r) ** 2) < self.target_position_tolerance:
@@ -194,10 +193,8 @@ class AutonomousNav():
 
 					# PRIMERA COMPARACION PARA ESTADO DE FWC ----
 					# REALIZAR CLEAR SHOT Y PROGRESS WITHFATGUARDS PARA IR A GOAL TO GOAL
-
-					print("distancia actual " + str(d_GTG) + "dis anterior " + str(self.dGTG_h) + "minpro " + str(self.minprogress))
+					print("distancia actual " + str(d_GTG) + "dis anterior " + str(self.dGTG_h) + " minpro " + str(self.minprogress))
 					if abs(theta_AO - e_theta) < np.pi/2 and d_GTG < abs(self.dGTG_h - self.minprogress):
-						
 						self.current_state = 'GoToGoal'
 					
 					# SEGUNDA COMPARACION PARA ESTADO DE FWC ----
@@ -234,14 +231,13 @@ class AutonomousNav():
 					#print("D_GTG " + str(d_GTG))
 					#print("DGTG_h " + str(self.dGTG_h))
 					#print("minprogress " + str(self.minprogress))
-					print("distancia actual " + str(d_GTG) + "dis anterior " + str(self.dGTG_h) + "minpro " + str(self.minprogress))
+					print("distancia actual " + str(d_GTG) + "dis anterior " + str(self.dGTG_h) + " minpro " + str(self.minprogress))
 					if abs(theta_AO - e_theta) < np.pi/2 and d_GTG < abs(self.dGTG_h - self.minprogress):
-						
 						self.current_state = 'GoToGoal'
 					
 					elif np.sqrt((self.x_target - self.x_r) ** 2 + (self.y_target - self.y_r) ** 2) < self.target_position_tolerance:
 						
-						self.current_state = 'Stop'
+						self.current_state = 'Stop' 
 
 			
 			self.pub_cmd_vel.publish(v_msg) # PUBLICAMOS VELOCIDADES LINEALES Y ANGULARES AL ROBOT
@@ -297,9 +293,9 @@ class AutonomousNav():
 		wfwc = -(np.pi/2) + theta_AO
 		wfwc = np.arctan2(np.sin(wfwc), np.cos(wfwc))
 
-		vfw = 0.12 # CONSTANTE DE VELOCIDAD LINEAL
-		kw = 3.5 # GANANCIA PARA GIRO EN W
-		wfw = kw * wfwc 
+		vfw = 0.03 # CONSTANTE DE VELOCIDAD LINEAL
+		kw = 0.55 # GANANCIA PARA GIRO EN W
+		wfw = kw * wfwc
 		return vfw, wfw
 
 	
@@ -311,14 +307,12 @@ class AutonomousNav():
 		wfwcc = np.arctan2(np.sin(wfwcc), np.cos(wfwcc))
 
 
-		vfw = 0.12 # CONSTANTE DE VELOCIDAD LINEAL
-		kw = 3.5 # GANANCIA PARA GIRO EN W
+		vfw = 0.03 # CONSTANTE DE VELOCIDAD LINEAL
+		kw = 0.55 # GANANCIA PARA GIRO EN W
 		wfw = kw * wfwcc 
 		return vfw, wfw
 
 	def laser_cb(self, msg):
-		
-		
 		## This function receives a message of type LaserScan and computes the closest object direction and range 
 		self.closest_range = min(msg.ranges) 
 		idx = msg.ranges.index(self.closest_range)
@@ -327,38 +321,7 @@ class AutonomousNav():
 		self.closest_angle = np.arctan2(np.sin(self.closest_angle), np.cos(self.closest_angle))
 		#print("ang" + str(self.closest_angle))
 		self.lidar_received = 1
-
-		
-
-		
-		"""
-		#This function returns the closest object to the robot 
-
-		#This functions receives a ROS LaserScan message and returns the distance and direction to the closest object 
-
-		#returns  closest_range [m], closest_angle [rad], 
-		
-		new_angle_min = -np.pi/2.0  
-
-		ranges_size=len(msg.ranges) 
-
-		cropped_ranges = msg.ranges[int(ranges_size/4):3*int(ranges_size/4)] 
-
-		min_idx = np.argmin(cropped_ranges) 
-
-		self.closest_range = cropped_ranges[min_idx] 
-
-		self.closest_angle = new_angle_min + min_idx * msg.angle_increment 
-
-		# limit the angle to [-pi, pi]
-
-		self.closest_angle = np.arctan2(np.sin(self.closest_angle), np.cos(self.closest_angle)) 
-		
-		print("range " + str(self.closest_range))
-		print("angle " + str(self.closest_angle))
-
-		"""
-		
+ 
 
 	def wl_cb(self, wl):  
 

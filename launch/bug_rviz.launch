@@ -1,0 +1,30 @@
+<launch>
+
+    <arg name="robot_description_file" default="puzzlebot_lidar.xacro"/>
+
+
+
+    <!-- Publicar descripción del robot desde la laptop -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+
+
+    <!-- Robot State Publisher -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find arrow_autonomusnavigation_puzzlebot)/urdf/$(arg robot_description_file)'"/>
+    </node>
+
+
+        <node name="joint_state_publisher"  pkg="joint_state_publisher" type="joint_state_publisher"> 
+    </node>
+
+
+    <!-- Lanza RViz con una configuración personalizada -->
+    <arg name="rviz_config" default="configs/puzzlebot_rviz_config.rviz"/>
+
+    <!-- Nodo de RViz -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find arrow_autonomusnavigation_puzzlebot)/$(arg rviz_config)" respawn="false" output="screen">
+    </node>
+
+    <param name="/use_sim_time" value="false"/>
+
+</launch>

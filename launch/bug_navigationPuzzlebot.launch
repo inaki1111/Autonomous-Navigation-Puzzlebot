@@ -1,0 +1,24 @@
+<launch>
+
+    <!-- Lanzar los nodos del aruco -->
+    <include file="$(find arrow_autonomusnavigation_puzzlebot)/launch/aruco.launch"/>
+
+        <!-- Parámetros para iniciar el puzzlebot con una transformación estática para el láser -->
+    <node pkg="tf" type="static_transform_publisher" name="base_laser_to_laser_tf" args="0 0 0 0 0 1 0 base_laser_link laser 100" />
+    
+    
+
+
+    <!-- Nodos personalizados en Python para manejo del estado y localización -->
+    <node name="Joint_State_Publisher" pkg="arrow_autonomusnavigation_puzzlebot" type="Joint_State_Publisher_python2.py" output="screen"/>
+    <node name="localisation" pkg="arrow_autonomusnavigation_puzzlebot" type="localisation_python2.py" output="screen"/>
+    <node name="Cordinate_Transform" pkg="arrow_autonomusnavigation_puzzlebot" type="Cordinate_Transform_python2.py" output="screen"/>
+    <node name="bug_0" pkg="arrow_autonomusnavigation_puzzlebot" type="bug_0_efk.py" output="screen"/>
+    <node name="aruco_tf_detector" pkg="arrow_autonomusnavigation_puzzlebot" type="fiducial_information.py" output="screen"/>
+
+    <!-- Parámetro de tiempo de simulación, desactivado para el robot real -->
+    <param name="/use_sim_time" value="false"/>
+
+
+</launch>
+

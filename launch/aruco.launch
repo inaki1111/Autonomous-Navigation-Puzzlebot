@@ -1,0 +1,21 @@
+<launch>
+    <!-- Lanzar puzzlebot_autostart -->
+    <include file="$(find puzzlebot_autostart)/launch/puzzlebot_autostart.launch"/>
+
+    <!-- Lanzar video_source de ros_deep_learning -->
+    <include file="$(find ros_deep_learning)/launch/video_source.ros1.launch"/>
+
+    <!-- Ejecutar image_transport republish -->
+    <node name="image_republish" pkg="image_transport" type="republish" args="raw in:=/video_source/raw compressed out:=camera/image"/>
+
+    <!-- Lanzar start_usb de calibration_project -->
+    <include file="$(find calibration_project)/launch/start_usb.launch"/>
+
+    <!-- Lanzar aruco_detect de aruco_markers_tec -->
+    <include file="$(find aruco_markers_tec)/launch/aruco_detect.launch"/>
+
+    <!-- Lanzar el nodo del lidar-->
+    <include file="$(find rplidar_ros)/launch/rplidar_a1.launch"/>
+
+</launch>
+
